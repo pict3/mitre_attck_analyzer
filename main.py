@@ -6,6 +6,9 @@ from enum import Enum
 
 from collections import Counter
 
+import sys
+
+
 class Category(Enum):
     DETECT      = 1
     RESPOND     = 2
@@ -88,8 +91,13 @@ def ConstructControlLanks(techniqueInfos: TechniqueInfo) -> dict:
     return control_lanks
 
 if __name__ == "__main__":
+    args = sys.argv
+    if 2 > len(args):
+        print('Arguments are too short')
 
-    input_json_file = 'gcp.json'
+        sys.exit(-1)
+
+    input_json_file = args[1]
     techniqueInfos: TechniqueInfo = LoadTechniqueInfos(input_json_file)
 
     control_lanks: dict = ConstructControlLanks(techniqueInfos)
